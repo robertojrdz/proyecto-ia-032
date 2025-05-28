@@ -1,5 +1,8 @@
-import graph as g
 from collections import deque
+
+#Change colors of terminal
+green = '\033[92m'
+end = '\033[0m'
 
 def breadth_first_search(graph, initial_vertex):
     visited = {vertex: False for vertex in graph.get_vertices()}
@@ -10,7 +13,7 @@ def breadth_first_search(graph, initial_vertex):
 
     while queue:
         current = queue.popleft()
-        print(current + ", ", end="")
+        print(green + current + ", ", end=f"{end}")
 
         for edge in graph.edges():
             if current in edge:
@@ -18,20 +21,3 @@ def breadth_first_search(graph, initial_vertex):
                     if neighbor != current and not visited[neighbor]:
                         visited[neighbor] = True
                         queue.append(neighbor)
-
-# Ejemplo Grafo
-graph_elements = {
-    "A" : ["B", "C", "E"],
-    "B" : ["A", "D", "F"],
-    "C" : ["A", "G"],
-    "D" : ["B"],
-    "E" : ["A", "F"],
-    "F" : ["B", "E"],
-    "G" : ["C"]
-}
-g = g.Graph(graph_elements)
-print('V=', g.get_vertices())
-print('E=', g.edges())
-
-# Ejemplo BFS
-breadth_first_search(g, "A")
